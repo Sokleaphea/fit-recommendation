@@ -1,5 +1,5 @@
 import '../services/location_service.dart';
-import '../../model/location_model.dart';
+import '../../models/location_model.dart';
 
 class LocationRepository {
   final _service = LocationService();

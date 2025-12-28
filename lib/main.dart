@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './ui/screen/location_screen.dart';
+import 'ui/screens/location_screen.dart';
 
 void main() {
   // runApp(const LocationScreen());

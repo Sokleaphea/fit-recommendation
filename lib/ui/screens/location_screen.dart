@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../data/repositories/location_repository.dart';
-import '../../model/location_model.dart';
+import '../../models/location_model.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
