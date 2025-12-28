@@ -5,7 +5,7 @@ void main() {
   // runApp(const LocationScreen());
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: const LocationScreen()
+    home: const OutfitScreen()
     )
   );
 }

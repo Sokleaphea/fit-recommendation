@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+import '../data/repositories/city_repositories.dart';
 
 var uuid = Uuid();
 
@@ -20,7 +21,7 @@ enum Styles { casual, streetwear, vintage, minimalist, chic, fit, oversized }
 class Outfit {
   final String id;
   final String description;
-  final String city;
+  final City city;
   final String shopName;
   final double price;
   Weather suitableWeather;
