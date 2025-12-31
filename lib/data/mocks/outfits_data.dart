@@ -1,27 +1,28 @@
-import 'package:oshifit/data/repositories/city_repositories.dart';
 import 'package:uuid/uuid.dart';
 import '../../models/outfit.dart';
-
+import '../../models/city_model.dart';
 
 var uuid = Uuid();
 
 List<Outfit> outfits = [
   Outfit(
-    description: "Light cotton t-shirt perfect for sunny days",
+    description: "Vintage Streetwear",
     city: City.PhnomPenh,
     shopName: "Sunshine Store",
     price: 15.0,
     suitableWeather: Weather.sunny,
     style: Styles.casual,
+    imagePath: "assets/outfits/outfit-1.jpg",
     imagePath: "assets/outfits/3.jpg",
   ),
   Outfit(
     description: "Elegant evening dress for formal events",
-    city: City.SiemReap,
+    city: City.PhnomPenh,
     shopName: "Royal Boutique",
     price: 120.0,
     suitableWeather: Weather.sunny,
     style: Styles.streetwear,
+    imagePath: "assets/outfits/outfit-2.jpg",
     imagePath: "assets/outfits/4.jpg",
   ),
   Outfit(
@@ -31,6 +32,7 @@ List<Outfit> outfits = [
     price: 40.0,
     suitableWeather: Weather.cold,
     style: Styles.casual,
+    imagePath: "assets/outfits/outfit-3.jpg",
     imagePath: "assets/outfits/3.jpg",
   ),
   Outfit(
@@ -40,6 +42,7 @@ List<Outfit> outfits = [
     price: 35.0,
     suitableWeather: Weather.rainy,
     style: Styles.minimalist,
+    imagePath: "assets/outfits/outfit-4.jpg",
     imagePath: "assets/outfits/4.jpg",
   ),
   Outfit(
