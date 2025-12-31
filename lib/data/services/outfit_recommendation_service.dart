@@ -1,6 +1,6 @@
 import 'package:oshifit/models/outfit.dart';
-import '../repositories/city_repositories.dart';
 import '../mocks/outfits_data.dart';
+import '../../models/city_model.dart';
 
 class OutfitRecommendationService {
   final List<Outfit> _outfits = outfits;

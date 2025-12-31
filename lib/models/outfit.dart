@@ -1,5 +1,5 @@
 import 'package:uuid/uuid.dart';
-import '../data/repositories/city_repositories.dart';
+import '../models/city_model.dart';
 
 var uuid = Uuid();
 

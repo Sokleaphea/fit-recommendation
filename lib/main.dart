@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'ui/screens/location_screen.dart';
+import './ui/screens/location_screen.dart';
 
 void main() {
   // runApp(const LocationScreen());
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: const OutfitScreen()
-    )
-  );
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: const OutfitSreen()));
 }
 
 class MyApp extends StatelessWidget {
