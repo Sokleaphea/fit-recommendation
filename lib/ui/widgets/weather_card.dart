@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oshifit/data/repositories/city_repositories.dart';
+import 'package:oshifit/models/city_model.dart';
 import 'package:oshifit/models/outfit.dart';
 
 class WeatherCard extends StatelessWidget {

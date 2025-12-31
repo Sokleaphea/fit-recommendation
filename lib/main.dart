@@ -15,7 +15,7 @@ void main() {
       textTheme:  GoogleFonts.nunitoSansTextTheme()
     ),
     // home: OutfitBoardScreen()
-    home: OutfitScreen(),
+    home: OutfitBoardScreen()
     )
   );
 }

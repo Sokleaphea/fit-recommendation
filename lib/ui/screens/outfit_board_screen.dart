@@ -11,9 +11,22 @@ class OutfitBoardScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFFF4E6),
       appBar: AppBar(
-        title: const Text('Outfits Board', style: TextStyle(fontWeight: FontWeight.w600)), 
-        backgroundColor: const Color(0xFFFFF4E6), 
-        elevation: 0
+        title: const Text('Outfits Board', style: TextStyle(fontWeight: FontWeight.w600)),
+        backgroundColor: const Color(0xFFFFF4E6),
+        elevation: 0,
+        centerTitle: false,
+        titleSpacing: 12,
+        iconTheme: const IconThemeData(color: Colors.black),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_alt_outlined, color: Colors.black),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.add, color: Colors.black),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: CustomScrollView(
         slivers: [

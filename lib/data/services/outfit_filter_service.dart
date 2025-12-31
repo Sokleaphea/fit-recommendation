@@ -1,4 +1,4 @@
-import 'package:oshifit/data/repositories/city_repositories.dart';
+import 'package:oshifit/models/city_model.dart';
 import 'package:oshifit/models/outfit.dart';
 import 'package:oshifit/models/outfit_criteria.dart';
 
