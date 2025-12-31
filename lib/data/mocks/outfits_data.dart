@@ -13,7 +13,7 @@ List<Outfit> outfits = [
     price: 15.0,
     suitableWeather: Weather.sunny,
     style: Styles.casual,
-    imagePath: "assets/images/tshirt.png",
+    imagePath: "assets/outfits/3.jpg",
   ),
   Outfit(
     description: "Elegant evening dress for formal events",
@@ -22,7 +22,7 @@ List<Outfit> outfits = [
     price: 120.0,
     suitableWeather: Weather.sunny,
     style: Styles.streetwear,
-    imagePath: "assets/images/dress.png",
+    imagePath: "assets/outfits/4.jpg",
   ),
   Outfit(
     description: "Warm hoodie for chilly mornings",
@@ -31,7 +31,7 @@ List<Outfit> outfits = [
     price: 40.0,
     suitableWeather: Weather.cold,
     style: Styles.casual,
-    imagePath: "assets/images/hoodie.png",
+    imagePath: "assets/outfits/3.jpg",
   ),
   Outfit(
     description: "Raincoat to stay dry in wet weather",
@@ -40,7 +40,7 @@ List<Outfit> outfits = [
     price: 35.0,
     suitableWeather: Weather.rainy,
     style: Styles.minimalist,
-    imagePath: "assets/images/raincoat.png",
+    imagePath: "assets/outfits/4.jpg",
   ),
   Outfit(
     description: "Traditional Khmer outfit for ceremonies",
@@ -49,6 +49,6 @@ List<Outfit> outfits = [
     price: 60.0,
     suitableWeather: Weather.sunny,
     style: Styles.minimalist,
-    imagePath: "assets/images/traditional.png",
+    imagePath: "assets/outfits/5.jpg",
   ),
 ];

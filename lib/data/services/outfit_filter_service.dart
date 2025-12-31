@@ -4,17 +4,13 @@ import 'package:oshifit/models/outfit_criteria.dart';
 
 class OutfitFilterService {
   List<Outfit> filterOutfits(List<Outfit> outfits, OutfitCriteria criteria, City? currentCity) {
-    final List<Styles> stylesToFilter = criteria.selectedStyles.length > 3 
-      ? criteria.selectedStyles.sublist(0, 3) 
-      : criteria.selectedStyles;
-
     List<Outfit> filtered = outfits.where(
       (outfit) => outfit.suitableWeather == criteria.selectedWeather
     ).toList();
 
-    if (stylesToFilter.isNotEmpty) {
+    if (criteria.selectedStyles.isNotEmpty) {
       filtered = filtered.where(
-        (outfit) => stylesToFilter.contains(outfit.style)
+        (outfit) => criteria.selectedStyles.contains(outfit.style)
       ).toList();
     }
 
