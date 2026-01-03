@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/outfit_card_details.dart';
 import '../../data/mocks/outfits_data.dart';
 

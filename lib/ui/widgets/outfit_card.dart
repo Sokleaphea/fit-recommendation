@@ -34,7 +34,7 @@ class _OutfitCardState extends State<OutfitCard> {
               setState(() => isFavorite = !isFavorite);
             },
             child: Padding(
-              padding: const EdgeInsets.only(top: 4), // optional, reduce/remove
+              padding: const EdgeInsets.only(top: 8), 
               child: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,
                 color: isFavorite ? Colors.red : Colors.black,
