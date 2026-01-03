@@ -1,25 +1,34 @@
 import 'package:oshifit/models/city_model.dart';
 import 'package:oshifit/models/outfit.dart';
 import 'package:oshifit/models/outfit_criteria.dart';
+import 'package:oshifit/data/services/location_service.dart';
+import 'package:oshifit/data/repositories/city_repositories.dart';
 
 class OutfitFilterService {
-  List<Outfit> filterOutfits(List<Outfit> outfits, OutfitCriteria criteria, City? currentCity) {
-    List<Outfit> filtered = outfits.where(
-      (outfit) => outfit.suitableWeather == criteria.selectedWeather
-    ).toList();
+  Future<List<Outfit>> filterOutfits(List<Outfit> outfits, OutfitCriteria criteria, {City? currentCity, LocationService? locationService}) async {
+    var filtered = outfits.where((o) => o.suitableWeather == criteria.selectedWeather).toList();
 
     if (criteria.selectedStyles.isNotEmpty) {
-      filtered = filtered.where(
-        (outfit) => criteria.selectedStyles.contains(outfit.style)
-      ).toList();
+      filtered = filtered.where((o) => criteria.selectedStyles.contains(o.style)).toList();
     }
 
-    if (criteria.currentLocation && currentCity != null) {
-      filtered = filtered.where(
-        (outfit) => outfit.city == currentCity
-      ).toList();
+    switch (criteria.locationMode) {
+      case LocationMode.all:
+        return filtered;
+      case LocationMode.current:
+        if (currentCity != null) return filtered.where((o) => o.city == currentCity).toList();
+        if (locationService == null) return <Outfit>[];
+        try {
+          final pos = await locationService.getCurrentLocation();
+          final matched = CityRepositories().matchCity(pos.latitude, pos.longitude);
+          if (matched == null) return <Outfit>[];
+          return filtered.where((o) => o.city == matched).toList();
+        } catch (_) {
+          return <Outfit>[];
+        }
+      case LocationMode.selected:
+        if (criteria.selectedCity == null) return <Outfit>[];
+        return filtered.where((o) => o.city == criteria.selectedCity).toList();
     }
-
-    return filtered;
   }
 }

@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:oshifit/ui/widgets/outfit_card.dart';
 import 'package:oshifit/data/mocks/outfits_data.dart';
+import 'package:oshifit/ui/screens/wizzard_screen.dart';
+import 'package:oshifit/ui/widgets/outfit_grid.dart';
+import 'package:oshifit/models/outfit.dart';
 
-class OutfitBoardScreen extends StatelessWidget {
+class OutfitBoardScreen extends StatefulWidget {
   const OutfitBoardScreen({super.key});
+
+  @override
+  State<OutfitBoardScreen> createState() => _OutfitBoardScreenState();
+}
+
+class _OutfitBoardScreenState extends State<OutfitBoardScreen> {
+  late List<Outfit> _displayedOutfits;
+
+  @override
+  void initState() {
+    super.initState();
+    _displayedOutfits = outfits;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +33,10 @@ class OutfitBoardScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.black),
         actions: [
           IconButton(
-            icon: const Icon(Icons.filter_alt_outlined, color: Colors.black),
-            onPressed: () {},
+            icon: const Icon(Icons.try_sms_star_outlined, color: Colors.black),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const WizzardScreen()));
+            },
           ),
           IconButton(
             icon: const Icon(Icons.add, color: Colors.black),
@@ -28,22 +44,7 @@ class OutfitBoardScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            sliver: SliverMasonryGrid.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 14,
-              childCount: outfits.length,
-              itemBuilder: (context, index) {
-                return OutfitCard(outfit: outfits[index]);
-              },
-            ),
-          ),
-        ],
-      ),
+      body: OutfitGrid(outfits: _displayedOutfits),
     );
   }
 }
