@@ -10,7 +10,7 @@ class OutfitCardDetails extends StatefulWidget {
 }
 
 class _OutfitCardDetailsState extends State<OutfitCardDetails> {
-  bool isLiked = false;
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -50,11 +50,11 @@ class _OutfitCardDetailsState extends State<OutfitCardDetails> {
                       onTap: () {
                         // print("Icon clicked!");
                         setState(() {
-                          isLiked = !isLiked;
+                          isFavorite = !isFavorite;
                         });
                       },
                       child: Icon(
-                        isLiked ? Icons.favorite :
+                        isFavorite ? Icons.favorite :
                         Icons.favorite_border_outlined,
                         size: 30,
                         color: Color(0xFF456882),

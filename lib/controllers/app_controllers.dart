@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:oshifit/ui/screens/outfit_board_screen.dart';
 import '../ui/widgets/navigation.dart';
 import '../ui/screens/home_screen.dart';
+import '../ui/screens/favorite_screen.dart';
 
 class AppControllers extends StatefulWidget {
   const AppControllers({super.key});
@@ -11,12 +13,11 @@ class AppControllers extends StatefulWidget {
 
 class _AppControllersState extends State<AppControllers> {
   int currentIndex = 0;
-  final pages = [
-    HomeScreen(),
-  ];
+  final pages = [HomeScreen(), OutfitBoardScreen(), FavoriteScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: IndexedStack(index: currentIndex, children: pages),
       bottomNavigationBar: Navigation(
         currentIndex: currentIndex,
         onTap: (index) {

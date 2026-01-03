@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oshifit/models/outfit.dart';
+import 'package:provider/provider.dart';
+import '../../models/favorite_model.dart';
 
 class OutfitCard extends StatefulWidget {
   final Outfit outfit;
@@ -10,10 +12,13 @@ class OutfitCard extends StatefulWidget {
 }
 
 class _OutfitCardState extends State<OutfitCard> {
-  bool isFavorite = false;
+  // final favorites = context.watch<FavoriteModel>();
+  // final isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
+    final favorites = context.watch<FavoriteModel>();
+    final isFavorite = favorites.isFavorite(widget.outfit);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -21,7 +26,7 @@ class _OutfitCardState extends State<OutfitCard> {
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Image.asset(
-            widget.outfit.imagePath, 
+            widget.outfit.imagePath,
             fit: BoxFit.cover,
             width: double.infinity,
           ),
@@ -31,7 +36,8 @@ class _OutfitCardState extends State<OutfitCard> {
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              setState(() => isFavorite = !isFavorite);
+              // setState(() => isFavorite = !isFavorite);
+              favorites.toggleFavorite(widget.outfit);
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 8), 
