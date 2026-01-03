@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:oshifit/ui/widgets/outfit_card.dart';
 import '../../data/repositories/location_repository.dart';
 import '../../models/location_model.dart';
 import '../../models/outfit.dart';
 import '../../models/city_model.dart';
 import '../../data/repositories/city_repositories.dart';
 import '../../data/services/outfit_recommendation_service.dart';
+import '../../ui/widgets/weather_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +17,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Weather currentWeather = Weather.rainy;
+  int currentTemp = 30;
+  int highTemp = 32;
+  int lowTemp = 28;
+  String weatherImage = 'assets/weather/rainy.png';
   final locationRepo = LocationRepository();
   final cityRepo = CityRepositories();
   final outfitService = OutfitRecommendationService();
@@ -37,6 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
         _city = cityRepo.matchCity(loc.latitude, loc.longitude);
         if (_city != null) {
           _outfits = outfitService.recommendOutfitsForCity(_city!);
+          _outfits = outfitService.recommendOutfitsForWeather(
+            _city!,
+            currentWeather,
+          );
         }
       });
       print(_location);
@@ -54,34 +66,63 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Outfit Recommendations')),
-      body: Center(
+      backgroundColor: const Color(0xFFFFF4E6),
+      appBar: AppBar(
+        title: Text(
+          "Today's Weather",
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+        centerTitle: false,
+        titleSpacing: 12,
+        elevation: 0,
+        backgroundColor: const Color(0xFFFFF4E6),
+      ),
+      body: SingleChildScrollView(
         child: _loading
-            ? CircularProgressIndicator()
+            ? Center(child: CircularProgressIndicator())
             : _error != null
             ? Text(_error!, style: TextStyle(color: Colors.red))
             : _city == null
-            ? Text('Could not detect your city')
+            ? Center(child: Text("Couldn't detect your city"))
             : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20),
-                  Text(
-                    'Your city: ${_city!.displayName}',
-                    style: TextStyle(fontSize: 18),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 16.0,
+                    ),
+                    child: WeatherCard(
+                      city: _city!,
+                      weatherImage: weatherImage,
+                      currentWeather: currentWeather,
+                      currentTemp: currentTemp,
+                      highTemp: highTemp,
+                      lowTemp: lowTemp,
+                    ),
                   ),
-                  SizedBox(height: 20),
-                  Expanded(
-                    child: ListView.builder(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      "Recommended Outfits",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: MasonryGridView.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: _outfits.length,
                       itemBuilder: (context, index) {
                         final outfit = _outfits[index];
-                        return ListTile(
-                          leading: Image.asset(outfit.imagePath),
-                          title: Text(outfit.description),
-                          subtitle: Text(
-                            '${outfit.shopName} - \$${outfit.price}',
-                          ),
-                        );
+                        return OutfitCard(outfit: outfit);
                       },
                     ),
                   ),
@@ -90,7 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _loadRecommendations,
-        child: Icon(Icons.refresh),
+        backgroundColor: Color(0xFFFFF4E6),
+        child: Icon(Icons.refresh, color: Color(0xFF456882)),
       ),
     );
   }
