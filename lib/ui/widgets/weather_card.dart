@@ -38,7 +38,7 @@ class WeatherCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(currentWeather.label, style: TextStyle(color: Colors.white)),
+                  Text(currentWeather.name, style: TextStyle(color: Colors.white)),
                   Text('H:$highTemp° L:$lowTemp°', style: TextStyle(color: Colors.white)),
                 ],
               ),

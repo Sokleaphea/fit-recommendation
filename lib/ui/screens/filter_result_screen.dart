@@ -10,10 +10,10 @@ class FilterResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Filter Results', style: TextStyle(fontWeight: FontWeight.w600)),
+        title: const Text('Results', style: TextStyle(fontWeight: FontWeight.w600)),
         backgroundColor: const Color(0xFFFFF4E6),
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       backgroundColor: const Color(0xFFFFF4E6),

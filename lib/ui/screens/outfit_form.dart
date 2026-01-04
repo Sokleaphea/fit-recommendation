@@ -13,8 +13,8 @@ class OutfitForm extends StatefulWidget {
 
 class _OutfitFormState extends State<OutfitForm> {
   static const defaultCity = City.PhnomPenh;
-  static const defaultWeather = Weather.sunny;
-  static const defaultStyle = Styles.casual;
+  static const defaultWeather = Weather.Sunny;
+  static const defaultStyle = Styles.Casual;
   final _descriptionController = TextEditingController();
   City _city = defaultCity;
   final _shopNameController = TextEditingController();
@@ -92,7 +92,7 @@ class _OutfitFormState extends State<OutfitForm> {
         ),
         title: Text(
           "Add Outfit",
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
         ),
         titleSpacing: 12,
         centerTitle: false,

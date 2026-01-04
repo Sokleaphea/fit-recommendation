@@ -4,19 +4,18 @@ import '../models/city_model.dart';
 var uuid = Uuid();
 
 enum Weather {
-  cloudy('Cloudy', 'cloudy.png'),
-  cold('Cold', 'cold.png'),
-  rainy('Rainy', 'raniny.png'),
-  sunny('Sunny', 'sunny.png'),
-  windy('Windy', 'windy.png');
+  Cloudy('cloudy.png'),
+  Cold('cold.png'),
+  Rainy('raniny.png'),
+  Sunny('sunny.png'),
+  Windy('windy.png');
 
-  final String label;
   final String imagePath;
 
-  const Weather(this.label, this.imagePath);
+  const Weather(this.imagePath);
 }
 
-enum Styles { casual, streetwear, vintage, minimalist, chic, fit, oversized }
+enum Styles { Casual, Streetwear, Vintage, Minimalist, Chic, Fit, Oversized }
 
 class Outfit {
   final String id;

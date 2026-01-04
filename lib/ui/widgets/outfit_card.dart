@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oshifit/models/outfit.dart';
+import 'package:oshifit/ui/screens/outfit_detail_screen.dart';
 import 'package:provider/provider.dart';
 import '../../models/favorite_model.dart';
 
@@ -16,36 +17,40 @@ class _OutfitCardState extends State<OutfitCard> {
   Widget build(BuildContext context) {
     final favorites = context.watch<FavoriteModel>();
     final isFavorite = favorites.isFavorite(widget.outfit);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Image.asset(
-            widget.outfit.imagePath,
-            fit: BoxFit.cover,
-            width: double.infinity,
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => OutfitDetailScreen(outfit: widget.outfit))),
+      behavior: HitTestBehavior.opaque,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              widget.outfit.imagePath,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
           ),
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
-              favorites.toggleFavorite(widget.outfit);
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8), 
-              child: Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : Colors.black,
-                size: 22,
+          Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                favorites.toggleFavorite(widget.outfit);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8), 
+                child: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.red : Colors.black,
+                  size: 22,
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
