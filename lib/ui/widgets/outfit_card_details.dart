@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../models/outfit.dart';
+import '../../models/favorite_model.dart';
 
 class OutfitCardDetails extends StatefulWidget {
   final Outfit outfit;
@@ -10,9 +12,11 @@ class OutfitCardDetails extends StatefulWidget {
 }
 
 class _OutfitCardDetailsState extends State<OutfitCardDetails> {
-  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
+    final favorites = context.watch<FavoriteModel>();
+    final isFavorite = favorites.isFavorite(widget.outfit);
+
     return Center(
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -48,16 +52,12 @@ class _OutfitCardDetailsState extends State<OutfitCardDetails> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // print("Icon clicked!");
-                        setState(() {
-                          isFavorite = !isFavorite;
-                        });
+                        favorites.toggleFavorite(widget.outfit);
                       },
                       child: Icon(
-                        isFavorite ? Icons.favorite :
-                        Icons.favorite_border_outlined,
+                        isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
                         size: 30,
-                        color: Color(0xFF456882),
+                        color: isFavorite ? Colors.red : const Color(0xFF456882),
                       ),
                     ),
                   ],
@@ -70,28 +70,29 @@ class _OutfitCardDetailsState extends State<OutfitCardDetails> {
                   children: [
                     Text(
                       "City: ${widget.outfit.city}",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     Text(
                       "Shop Name: ${widget.outfit.shopName}",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     Text(
                       "Price: \$${widget.outfit.price.toStringAsFixed(2)}",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
+                    SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 40,
+                        vertical: 8,
+                        horizontal: 20,
                       ),
                       decoration: BoxDecoration(
-                        color: Color(0xFF456882),
+                        color: const Color(0xFF456882),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
                         widget.outfit.style.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Color(0xFFFFF4E6),
                         ),

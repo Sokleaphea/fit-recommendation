@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:oshifit/ui/widgets/outfit_card.dart';
+import 'package:oshifit/ui/widgets/outfit_grid.dart';
 import '../../data/repositories/location_repository.dart';
 import '../../models/location_model.dart';
 import '../../models/outfit.dart';
@@ -17,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Weather currentWeather = Weather.rainy;
+  Weather currentWeather = Weather.Rainy;
   int currentTemp = 30;
   int highTemp = 32;
   int lowTemp = 28;
@@ -45,10 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _city = cityRepo.matchCity(loc.latitude, loc.longitude);
         if (_city != null) {
           _outfits = outfitService.recommendOutfitsForCity(_city!);
-          _outfits = outfitService.recommendOutfitsForWeather(
-            _city!,
-            currentWeather,
-          );
+          _outfits = outfitService.recommendOutfitsForWeather(_city!, currentWeather);
         }
       });
       print(_location);
@@ -68,10 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFF4E6),
       appBar: AppBar(
-        title: Text(
-          "Today's Weather",
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
+        title: Text("Today's Weather", style: TextStyle(fontWeight: FontWeight.w600)),
         centerTitle: false,
         titleSpacing: 12,
         elevation: 0,
@@ -88,44 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8.0,
-                      horizontal: 16.0,
-                    ),
-                    child: WeatherCard(
-                      city: _city!,
-                      weatherImage: weatherImage,
-                      currentWeather: currentWeather,
-                      currentTemp: currentTemp,
-                      highTemp: highTemp,
-                      lowTemp: lowTemp,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    child: WeatherCard(city: _city!, weatherImage: weatherImage, currentWeather: currentWeather, currentTemp: currentTemp, highTemp: highTemp, lowTemp: lowTemp),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      "Recommended Outfits",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: Text("Recommended Outfits", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: MasonryGridView.count(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: _outfits.length,
-                      itemBuilder: (context, index) {
-                        final outfit = _outfits[index];
-                        return OutfitCard(outfit: outfit);
-                      },
-                    ),
-                  ),
+                  OutfitGrid(outfits: _outfits),
                 ],
               ),
       ),

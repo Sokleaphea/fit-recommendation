@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:oshifit/controllers/app_controllers.dart';
 import 'package:oshifit/models/favorite_model.dart';
 import 'package:provider/provider.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => FavoriteModel())],
@@ -16,9 +19,10 @@ class Oshifit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AppControllers()
+      theme: ThemeData(textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)),
+      home: const AppControllers(),
     );
   }
 }
