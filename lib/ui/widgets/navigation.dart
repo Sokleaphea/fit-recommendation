@@ -11,22 +11,20 @@ class Navigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      child: Container(
-        margin: EdgeInsets.all(20),
-        height: 70,
-        decoration: BoxDecoration(
-          color: const Color(0xFF456882),
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _navItem(Icons.home_filled, 0),
-            _navItem(Icons.grid_view_outlined, 1),
-            _navItem(Icons.favorite_border_outlined, 2)
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.all(20),
+      height: 70,
+      decoration: BoxDecoration(
+        color: const Color(0xFF456882),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _navItem(Icons.home_filled, 0),
+          _navItem(Icons.grid_view_outlined, 1),
+          _navItem(Icons.favorite_border_outlined, 2)
+        ],
       ),
     );
   }
