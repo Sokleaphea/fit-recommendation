@@ -12,9 +12,6 @@ class OutfitCard extends StatefulWidget {
 }
 
 class _OutfitCardState extends State<OutfitCard> {
-  // final favorites = context.watch<FavoriteModel>();
-  // final isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     final favorites = context.watch<FavoriteModel>();
@@ -36,7 +33,6 @@ class _OutfitCardState extends State<OutfitCard> {
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              // setState(() => isFavorite = !isFavorite);
               favorites.toggleFavorite(widget.outfit);
             },
             child: Padding(
