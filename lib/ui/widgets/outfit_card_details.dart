@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/outfit.dart';
+import '../../models/city_model.dart';
 import '../../models/favorite_model.dart';
 
 class OutfitCardDetails extends StatefulWidget {
@@ -69,7 +70,7 @@ class _OutfitCardDetailsState extends State<OutfitCardDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "City: ${widget.outfit.city}",
+                      "City: ${widget.outfit.city.displayName}",
                       style: const TextStyle(fontSize: 16),
                     ),
                     Text(
