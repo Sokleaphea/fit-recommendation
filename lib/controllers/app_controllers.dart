@@ -17,7 +17,6 @@ class _AppControllersState extends State<AppControllers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       backgroundColor: Color(0xFFFFF4E6),
       body: IndexedStack(index: currentIndex, children: pages),
       bottomNavigationBar: Navigation(
