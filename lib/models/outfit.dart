@@ -15,7 +15,7 @@ enum Weather {
   const Weather(this.imagePath);
 }
 
-enum Styles { Casual, Streetwear, Vintage, Minimalist, Chic, Fit, Oversized }
+enum Styles { Casual, Streetwear, Minimalist, Chic, Fit, Oversized }
 
 class Outfit {
   final String id;
@@ -27,5 +27,5 @@ class Outfit {
   Styles style;
   final String imagePath;
 
-  Outfit({String? id, required this.description, required this.city, required this.shopName, required this.price, required this.suitableWeather, required this.style, required this.imagePath}) : id = uuid.v4();
+  Outfit({String? id, required this.description, required this.city, required this.shopName, required this.price, required this.suitableWeather, required this.style, required this.imagePath}) : id = id ?? uuid.v4();
 }

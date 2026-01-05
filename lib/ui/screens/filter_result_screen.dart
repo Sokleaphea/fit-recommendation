@@ -10,11 +10,17 @@ class FilterResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Results', style: TextStyle(fontWeight: FontWeight.w600)),
         backgroundColor: const Color(0xFFFFF4E6),
         elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios), 
+          onPressed: () => Navigator.of(context).maybePop()
+        ),
+        title: const Text(
+          'Result', 
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)
+        ),
         centerTitle: false,
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
       backgroundColor: const Color(0xFFFFF4E6),
       body: OutfitGrid(outfits: outfits),

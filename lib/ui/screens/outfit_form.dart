@@ -23,15 +23,22 @@ class _OutfitFormState extends State<OutfitForm> {
   Weather _suitableWeather = defaultWeather;
   Styles _style = defaultStyle;
   final ImagePicker _picker = ImagePicker();
+  double? _imageAspectRatio;
 
   Future<void> _pickImage(ImageSource source) async {
     final XFile? image = await _picker.pickImage(
       source: source,
       imageQuality: 80,
     );
+
     if (image != null) {
+      final file = File(image.path);
+      final decodedImage = await decodeImageFromList(file.readAsBytesSync());
+
       setState(() {
-        _selectedImage = File(image.path);
+        _selectedImage = file;
+        _imageAspectRatio =
+            decodedImage.width / decodedImage.height; 
       });
     }
   }
@@ -123,7 +130,6 @@ class _OutfitFormState extends State<OutfitForm> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               child: Text("City", style: TextStyle(fontSize: 16)),
             ),
-            // Text("Description", style: TextStyle(fontSize: 16)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: DropdownButtonFormField<City>(
@@ -155,7 +161,6 @@ class _OutfitFormState extends State<OutfitForm> {
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
               child: Text("Shop Name", style: TextStyle(fontSize: 16)),
             ),
-            // Text("Description", style: TextStyle(fontSize: 16)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: TextField(
@@ -173,7 +178,6 @@ class _OutfitFormState extends State<OutfitForm> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               child: Text("Price", style: TextStyle(fontSize: 16)),
             ),
-            // Text("Description", style: TextStyle(fontSize: 16)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: TextField(
@@ -191,7 +195,6 @@ class _OutfitFormState extends State<OutfitForm> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               child: Text("Style/Weather", style: TextStyle(fontSize: 16)),
             ),
-            // Text("Description", style: TextStyle(fontSize: 16)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Row(
@@ -256,37 +259,38 @@ class _OutfitFormState extends State<OutfitForm> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               child: Text("Image", style: TextStyle(fontSize: 16)),
             ),
-            // Text("Description", style: TextStyle(fontSize: 16)),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: GestureDetector(
                 onTap: () => _pickImage(ImageSource.gallery),
                 child: Container(
-                  height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.black),
                   ),
                   child: _selectedImage == null
-                      ? Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: Transform.rotate(
-                                angle: -1,
+                      ? SizedBox(
+                          height: 50,
+                          child: Row(
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12),
                                 child: Icon(Icons.attachment),
                               ),
-                            ),
-                            Text(
-                              "Attach Photo",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
+                              Text("Attach Photo", style: TextStyle(fontSize: 16)),
+                            ],
+                          ),
                         )
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          child: Image.file(_selectedImage!, fit: BoxFit.cover),
+                          child: AspectRatio(
+                            aspectRatio: _imageAspectRatio ?? 1,
+                            child: Image.file(
+                              _selectedImage!,
+                              fit: BoxFit.contain, 
+                            ),
+                          ),
                         ),
                 ),
               ),
@@ -295,7 +299,7 @@ class _OutfitFormState extends State<OutfitForm> {
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
+              padding: EdgeInsets.symmetric(horizontal: 12,),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -317,6 +321,7 @@ class _OutfitFormState extends State<OutfitForm> {
                 ],
               ),
             ),
+            SizedBox(height: 12)
           ],
         ),
       ),

@@ -1,9 +1,9 @@
 enum City { PhnomPenh, SiemReap, Battambang, BanteayMeanchey, Takeo }
 
-class CityLocaiton {
+class CityLocation {
   final City city;
   final double latMin, latMax, lngMin, lngMax;
-  CityLocaiton(
+  CityLocation(
     this.city,
     this.latMin,
     this.latMax,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oshifit/data/mocks/outfits_data.dart';
 import 'package:oshifit/models/outfit.dart';
-import 'package:oshifit/ui/widgets/outfit_card.dart';
 import 'package:oshifit/ui/widgets/outfit_card_details.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:oshifit/ui/widgets/outfit_grid.dart';
 
 class OutfitDetailScreen extends StatelessWidget {
   final Outfit outfit;
@@ -30,32 +29,26 @@ class OutfitDetailScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFFFF4E6),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                OutfitCardDetails(outfit: outfit),
-                const SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'More outfits', 
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OutfitCardDetails(outfit: outfit),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'More outfits',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                MasonryGridView.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 14,
-                  itemCount: other.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => OutfitCard(outfit: other[index]),
-                ),
-              ],
-            ),
+              ),
+              OutfitGrid(outfits: other, scrollable: false,),
+            ],
           ),
         ),
       ),

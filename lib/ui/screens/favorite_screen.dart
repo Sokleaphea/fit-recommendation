@@ -24,8 +24,7 @@ class FavoriteScreen extends StatelessWidget {
           child: Text(
             "You haven't liked anything yet", 
             style: Theme.of(context).textTheme.bodyLarge)
-          ) : OutfitGrid(outfits: favoritesOutfits
-        ),
+          ) : OutfitGrid(outfits: favoritesOutfits, scrollable: true),
     );
   }
 }
