@@ -61,7 +61,7 @@ class _OutfitBoardScreenState extends State<OutfitBoardScreen> {
           ),
         ],
       ),
-      body: OutfitGrid(outfits: _displayedOutfits),
+      body: OutfitGrid(outfits: _displayedOutfits, scrollable: true),
     );
   }
 }

@@ -5,11 +5,22 @@ import 'package:oshifit/ui/widgets/outfit_card.dart';
 
 class OutfitGrid extends StatelessWidget {
   final List<Outfit> outfits;
-  const OutfitGrid({super.key, required this.outfits});
+  final bool scrollable;
+
+  const OutfitGrid({
+    super.key,
+    required this.outfits,
+    this.scrollable = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      shrinkWrap: !scrollable,
+      physics: scrollable
+          ? const AlwaysScrollableScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
+      primary: scrollable,
       slivers: [
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

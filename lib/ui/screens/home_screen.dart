@@ -16,11 +16,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Weather currentWeather = Weather.Rainy;
+  Weather currentWeather = Weather.Sunny;
   int currentTemp = 30;
   int highTemp = 32;
   int lowTemp = 28;
-  String weatherImage = 'assets/weather/rainy.png';
+  String weatherImage = 'assets/weather/sunny.png';
   final locationRepo = LocationRepository();
   final cityRepo = CityRepositories();
   final outfitService = OutfitRecommendationService();
@@ -82,72 +82,45 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         backgroundColor: const Color(0xFFFFF4E6),
       ),
-      // body: SingleChildScrollView(
-      //   child: _loading
-      //       ? Center(child: CircularProgressIndicator())
-      //       : _error != null
-      //       ? Text(_error!, style: TextStyle(color: Colors.red))
-      //       : _city == null
-      //       ? Center(child: Text("Couldn't detect your city"))
-      //       : Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             Padding(
-      //               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      //               child: WeatherCard(city: _city!, weatherImage: weatherImage, currentWeather: currentWeather, currentTemp: currentTemp, highTemp: highTemp, lowTemp: lowTemp),
-      //             ),
-      //             Padding(
-      //               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      //               child: Text("Recommended Outfits", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-      //             ),
-      //             OutfitGrid(outfits: _outfits),
-      //           ],
-      //         ),
-      // ),
       body: _loading
-          ? Center(child: CircularProgressIndicator())
-          : _error != null
-          ? Text(_error!, style: TextStyle(color: Colors.red))
-          : _city == null
-          ? Center(child: Text("Couldn't detect your city"))
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 16.0,
-                  ),
-                  child: WeatherCard(
-                    city: _city!,
-                    weatherImage: weatherImage,
-                    currentWeather: currentWeather,
-                    currentTemp: currentTemp,
-                    highTemp: highTemp,
-                    lowTemp: lowTemp,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    "Recommended Outfits",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: _loadRecommendations,
-                    child: OutfitGrid(outfits: _outfits),
-                  ),
-                ),
-              ],
+        ? Center(child: CircularProgressIndicator())
+        : _error != null
+        ? Text(_error!, style: TextStyle(color: Colors.red))
+        : _city == null
+        ? Center(child: Text("Couldn't detect your city"))
+        : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 8,
+              ),
+              child: WeatherCard(
+                city: _city!,
+                weatherImage: weatherImage,
+                currentWeather: currentWeather,
+                currentTemp: currentTemp,
+                highTemp: highTemp,
+                lowTemp: lowTemp,
+              ),
             ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _loadRecommendations,
-      //   backgroundColor: Color(0xFFFFF4E6),
-      //   child: Icon(Icons.refresh, color: Color(0xFF456882)),
-      // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "Recommended Outfits",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: _loadRecommendations,
+                child: OutfitGrid(outfits: _outfits, scrollable: true),
+              ),
+            ),
+          ],
+        ),
     );
   }
 }
