@@ -16,11 +16,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Weather currentWeather = Weather.Rainy;
+  Weather currentWeather = Weather.Sunny;
   int currentTemp = 30;
   int highTemp = 32;
   int lowTemp = 28;
-  String weatherImage = 'assets/weather/rainy.png';
+  String weatherImage = 'assets/weather/sunny.png';
   final locationRepo = LocationRepository();
   final cityRepo = CityRepositories();
   final outfitService = OutfitRecommendationService();

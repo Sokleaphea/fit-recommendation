@@ -23,7 +23,10 @@ class FilterResultScreen extends StatelessWidget {
         centerTitle: false,
       ),
       backgroundColor: const Color(0xFFFFF4E6),
-      body: OutfitGrid(outfits: outfits),
+      body: Padding(
+        padding: EdgeInsets.only(bottom: 10),
+        child: OutfitGrid(outfits: outfits)
+      ),
     );
   }
 }
