@@ -4,6 +4,7 @@ import '../models/outfit.dart';
 class FavoriteModel extends ChangeNotifier {
   final List<Outfit> _favorites = [];
   List<Outfit> get favorite => _favorites;
+  
   void toggleFavorite(Outfit outfit) {
     if (_favorites.contains(outfit)) {
       _favorites.remove(outfit);

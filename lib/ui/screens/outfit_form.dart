@@ -181,7 +181,7 @@ class _OutfitFormState extends State<OutfitForm> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: TextField(
-                keyboardType: TextInputType.number,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 controller: _priceController,
                 maxLength: 10,
                 decoration: const InputDecoration(
