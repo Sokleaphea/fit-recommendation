@@ -54,7 +54,7 @@ class _OutfitBoardScreenState extends State<OutfitBoardScreen> {
               );
               if (newOutfit != null) {
                 setState(() {
-                  _displayedOutfits.add(newOutfit);
+                  _displayedOutfits.insert(0, newOutfit);
                 });
               }
             },
